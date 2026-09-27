@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SimpleHome setup</title>
+<style>
+  body { font: 17px/1.5 -apple-system, system-ui, sans-serif; max-width: 520px; margin: 30vh auto 0; padding: 0 16px; text-align: center; color: #1d1d1f }
+  a.button { display: inline-block; margin-top: 16px; padding: 12px 22px; border-radius: 12px; background: #0a84ff; color: white; text-decoration: none; font-weight: 600 }
+</style>
+<!-- The appliance list travels in the URL fragment (after #), which browsers never send to this server.
+     This page only hands it to the SimpleHome app on this iPhone. -->
+<p id="msg">Opening SimpleHome…</p>
+<a id="open" class="button" hidden>Open in SimpleHome</a>
+<script>
+  const setup = location.hash.slice(1);
+  if (setup) {
+    const target = "simplehome://import?setup=" + setup;
+    const open = document.getElementById("open");
+    open.href = target;
+    open.hidden = false;
+    location.replace(target);
+  } else {
+    document.getElementById("msg").textContent = "This link is meant to be opened on an iPhone with SimpleHome installed.";
+  }
+</script>
